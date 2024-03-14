@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { PiPlus } from "react-icons/pi";
-
+import style from './CreaateVagaButton.module.css'
 
 
 const CreateVagaButton = () => {
@@ -15,36 +15,35 @@ const CreateVagaButton = () => {
     setIsOpen(false);
   };
 
-  const handleModalClick = (event: { stopPropagation: () => void; }) => {
-    event.stopPropagation();
-  };
+
   return (
     <div >
-      <button
-      className="btn"
-      onClick={openModal}
-      
-      ><PiPlus size={'25px'}/>
-      </button>
-      {isOpen && (
-      <div className='flex justify-center items-center fixed top-1/2 left-1/2 w-max'>
-        <div className=" bg-slate-400 w-96 h-32 modal-overlay" onClick={closeModal}>
-          <div className="modal">
-            <div className="modal-box bg-slate-600" onClick={handleModalClick}>
-              <button type="button" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
-              <div className="flex absolute content-center bg-zinc-500 modal-action">
-                <form method="dialog">
-                {/* if there is a button in form, it will close the modal */}
-                <p>teste</p>
-              </form>
-            </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <button
+          className="btn"
+          onClick={openModal}
+          onChange={closeModal}
+        ><PiPlus size={'25px'} />
+        </button>
       </div>
+      {isOpen && (
+        <div className='
+        className="grid grid-cols-3 grid-rows-3 w-96 h-1/2
+        fixed top-1/3 left-1/2 transform -translate-x-1/2 
+        -translate-y-1/2 p-20 bg-gray-400 border-2 mt-5 
+        rounded-lg shadow-lg border-indigo-400
+        
+        ' >
+          <button type="button" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
+          <form className='flex' method="dialog">
+            <input type="text" />
+            {/* if there is a button in form, it will close the modal */}
+            <p>teste</p>
+          </form>
+        </div>
       )}
-      
-      
+
+
     </div>
   )
 }

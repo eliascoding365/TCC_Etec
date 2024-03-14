@@ -38,7 +38,7 @@ const NavBar = () => {
           </div>
           </Link>
         )}
-        <CreateVagaButton/>
+        <CreateVagaButton />
       </ul>
     </nav>
     )
