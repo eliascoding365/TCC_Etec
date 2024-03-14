@@ -3,8 +3,8 @@ import { PiPlus } from "react-icons/pi";
 
 const AddBtnModal = () => {
   return (
-    <button>
-      <PiPlus size={'25px'}/>
+    <button >
+      <PiPlus className='text-gray-600'size={'25px'}/>
     </button>
   )
 }
