@@ -1,15 +1,15 @@
 'use client'
+import React from 'react'
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PiHouseLine } from "react-icons/pi";
 import { PiBooks } from "react-icons/pi";
 import { PiSuitcase } from "react-icons/pi";
 import { PiCodepenLogo } from "react-icons/pi";
-
+import CreateVagaButton from "./components/CreateVagaButton/CreateVagaButton";
 import classnames from "classnames";
 
-import React from 'react'
-import AddBtnModal from "./components/AddBtnModal/AddBtnModal";
+
 
 const NavBar = () => {
   const currentPath = usePathname()
@@ -38,7 +38,7 @@ const NavBar = () => {
           </div>
           </Link>
         )}
-        <AddBtnModal/>
+        <CreateVagaButton/>
       </ul>
     </nav>
     )
