@@ -12,13 +12,22 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
-    },
-      gridTemplateColumns: {
+        },
+        gridTemplateColumns: {
         '3': 'repeat(3, minmax(0, 1fr))',
-    },
+      },
       gridTemplateRows: {
         '3': 'repeat(3, minmax(0, 1fr))',
+      },
+      backdropBlur: {
+        xs: '2px',
+      },
+      height: {
+        '128': '600px',
+      },
+      widht: {
+        '350': '350px'
+      }
     },
   },
   plugins: [],

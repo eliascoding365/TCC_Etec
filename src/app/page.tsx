@@ -2,7 +2,7 @@ import CreateVagaButton from "./components/CreateVagaButton/CreateVagaButton";
 
 export default function Home() {
   return (
-    <main >
+    <main className='w-full'>
       <h1>Hi</h1>
       <CreateVagaButton
       />
