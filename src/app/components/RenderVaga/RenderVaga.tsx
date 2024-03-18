@@ -1,14 +1,15 @@
 import React from 'react'
 import prisma from '../../../../prisma/client'
+
 const RenderVaga = async () => {
   const vaga = await prisma.vaga.findMany()
   return (
-    <div className='flex flex-wrap justify-center w-1/2  h-screen rounded-md my-8'>
+    <div className='flex flex-wrap justify-center mx-4  h-screen rounded-md my-8'>
       {vaga.map(vaga => (
 
         <div key={vaga.id} className='
         flex flex-col h-96 w-96 m-2 py-6 items-center
-        rounded-md bg-[#f3f4f6] border border-1/2 border-gray-500
+        border-r border-1/2 border-gray-500
         
         '>
         <header>

@@ -45,7 +45,7 @@ const ButtonOpenModalCreateVaga = () => {
           className="btn"
           onClick={openModal}
           onChange={closeModal}
-        ><PiPlus size={'25px'} />
+        ><PiPlus size={'25px'} color='white'/>
         </button>
       </div>
       {isOpen && (
