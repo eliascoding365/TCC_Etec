@@ -1,15 +1,14 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
 import { PiPlus } from "react-icons/pi";
-import style from './CreaateVagaButton.module.css'
 import FormVaga from './FormVaga';
-import ButtonCreateVaga from './ButtonCreateVaga';
-
+import  { useRouter } from 'next/router';
 
 const ButtonOpenModalCreateVaga = () => {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
+  
   const openModal = () => {
     setIsOpen(true);
   };
@@ -20,14 +19,16 @@ const ButtonOpenModalCreateVaga = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: { target: any; }) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
         closeModal();
       }
     };
 
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
+      document.body.classList.add("overflow-y-hidden")
     } else {
+      document.body.classList.remove("overflow-y-hidden")
       document.removeEventListener('mousedown', handleClickOutside);
     }
 
@@ -52,7 +53,7 @@ const ButtonOpenModalCreateVaga = () => {
           flex items-center justify-center
           w-full h-full
           bg-gray-900 bg-opacity-50
-          backdrop-blur-xs absolute inset-0 z-50 
+          backdrop-blur-xs fixed inset-0 z-50 
           
           ">
           <div ref={modalRef} className='
@@ -63,7 +64,7 @@ const ButtonOpenModalCreateVaga = () => {
         ' >
             <button type="button" className="btn btn-sm btn-circle btn-ghost flex absolute mx-6 my-4 right-0 top-0" onClick={closeModal}>✕</button>
             <h2 className="flex justify-center text-2xl font-bold mb-4">Criar Vaga</h2>
-            <FormVaga />
+            <FormVaga/>
           </div>
         </div>
       )}
@@ -75,6 +76,3 @@ const ButtonOpenModalCreateVaga = () => {
 
 export default ButtonOpenModalCreateVaga
 
-function handler(this: Document, ev: MouseEvent) {
-  throw new Error('Function not implemented.');
-}
