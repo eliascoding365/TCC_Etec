@@ -2,9 +2,11 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { PiPlus } from "react-icons/pi";
 import style from './CreaateVagaButton.module.css'
+import FormVaga from './FormVaga';
+import ButtonCreateVaga from './ButtonCreateVaga';
 
 
-const CreateVagaButton = () => {
+const ButtonOpenModalCreateVaga = () => {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null);
 
@@ -59,15 +61,12 @@ const CreateVagaButton = () => {
             bg-gray-200 rounded-xl shadow-2xl 
             border border-zinc-200
         ' >
-            <button type="button" className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeModal}>✕</button>
+            <button type="button" className="btn btn-sm btn-circle btn-ghost flex absolute mx-6 my-4 right-0 top-0" onClick={closeModal}>✕</button>
             <h2 className="flex justify-center text-2xl font-bold mb-4">Criar Vaga</h2>
-            <form className='flex flex-col' method="dialog">
-              <p className="flex items-center pl-14 mb-1 text-gray-700">Escreva seu nome</p>
-              <div className='flex items-center pl-14'>
-                <input className='rounded-md'type="text" />
-              </div>
-            </form>
-
+            <FormVaga />
+            <footer className='flex justify-end absolute right-0 bottom-0 mx-6 my-6'>
+              <ButtonCreateVaga/>
+            </footer>
           </div>
         </div>
       )}
@@ -77,7 +76,7 @@ const CreateVagaButton = () => {
   )
 }
 
-export default CreateVagaButton
+export default ButtonOpenModalCreateVaga
 
 function handler(this: Document, ev: MouseEvent) {
   throw new Error('Function not implemented.');

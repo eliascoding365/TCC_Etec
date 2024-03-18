@@ -6,7 +6,7 @@ import { PiHouseLine } from "react-icons/pi";
 import { PiBooks } from "react-icons/pi";
 import { PiSuitcase } from "react-icons/pi";
 import { PiCodepenLogo } from "react-icons/pi";
-import CreateVagaButton from "./components/CreateVagaButton/CreateVagaButton";
+import ButtonOpenModalCreateVaga from "./components/ButtonOpenModalCreateVaga/ButtonOpenModalCreateVaga";
 import classnames from "classnames";
 
 
@@ -38,7 +38,7 @@ const NavBar = () => {
           </div>
           </Link>
         )}
-        <CreateVagaButton />
+        <ButtonOpenModalCreateVaga />
       </ul>
     </nav>
     )
