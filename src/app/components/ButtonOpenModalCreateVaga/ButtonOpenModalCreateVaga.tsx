@@ -64,9 +64,6 @@ const ButtonOpenModalCreateVaga = () => {
             <button type="button" className="btn btn-sm btn-circle btn-ghost flex absolute mx-6 my-4 right-0 top-0" onClick={closeModal}>✕</button>
             <h2 className="flex justify-center text-2xl font-bold mb-4">Criar Vaga</h2>
             <FormVaga />
-            <footer className='flex justify-end absolute right-0 bottom-0 mx-6 my-6'>
-              <ButtonCreateVaga/>
-            </footer>
           </div>
         </div>
       )}
