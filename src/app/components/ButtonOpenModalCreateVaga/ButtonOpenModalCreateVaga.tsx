@@ -8,7 +8,7 @@ import ButtonCreateVaga from './ButtonCreateVaga';
 
 const ButtonOpenModalCreateVaga = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const openModal = () => {
     setIsOpen(true);
