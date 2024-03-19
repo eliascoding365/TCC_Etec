@@ -37,6 +37,9 @@ const CardVagaExpandMore = ({children}: ExpandProps) => {
 return (
   <>
     <CardActions disableSpacing>
+      <CardContent>
+        <span>Saiba mais</span>
+      </CardContent>
 
       <ExpandMore
         expand={expanded}
@@ -44,12 +47,13 @@ return (
         aria-expanded={expanded}
         aria-label="show more"
       >
-        <ExpandMoreIcon />
-      </ExpandMore>
+        <ExpandMoreIcon  >
+        </ExpandMoreIcon>
+      </ExpandMore> 
     </CardActions>
     <Collapse in={expanded} timeout="auto" unmountOnExit>
       <CardContent>
-        <Typography paragraph>Description:</Typography>
+        <Typography paragraph>Informações:</Typography>
         <Typography paragraph>
           {children}
         </Typography>

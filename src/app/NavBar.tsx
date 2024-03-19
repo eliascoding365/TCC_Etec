@@ -19,7 +19,7 @@ const NavBar = () => {
     //{ label: 'Add'   , href: '/',      icon: <PiPlus size={'25px'}/>}
   ]
   return (
-    <nav className='flex justify-between bg-blue-600 space-x-8 border-b mb-5 px-32 h-14 items-center'>
+    <nav className='flex justify-between bg-blue-600 space-x-8 border-b px-32 h-14 items-center'>
       <Link href="/"> <PiCodepenLogo className='text-white'size={'35px'}/> </Link>
       <ul className='flex  space-x-6'>
         {links.map(link => 
