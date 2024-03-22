@@ -58,7 +58,7 @@ const ButtonOpenModalCreateVaga = () => {
           ">
           <div ref={modalRef} className='
             flex flex-col absolute
-            w-96 h-128 pt-12 m-20 overflow-y-auto
+            w-96 h-2/3 pt-12 m-20 overflow-y-auto
             bg-gray-200 rounded-xl shadow-2xl 
             border border-zinc-200
         ' >

@@ -31,7 +31,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${rubik.className} max-h-screen`} >
+      <body className={`${rubik.className} `} >
         <NavBar />
         <main className="w-screen h-screen">{children}</main>
       </body>

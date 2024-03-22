@@ -19,8 +19,8 @@ export default async function CardVaga() {
   const vaga = await prisma.vaga.findMany()
 
   return (
-    <>
-      <Container maxWidth="sm" className='flex flex-col w-auto h-auto m-8' >
+    <div className='flex justify-center'>
+      <Container  className='flex flex-col w-auto h-auto m-8 justify-center' >
         {vaga.map(vagas =>
           <Card sx={{ maxWidth: 345 }} className='mb-4'key={vagas.id}>
             <CardHeader
@@ -65,6 +65,6 @@ export default async function CardVaga() {
           </Card>
         )}
       </Container>
-    </>
+    </div>
   );
 }
