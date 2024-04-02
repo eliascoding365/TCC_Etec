@@ -26,6 +26,7 @@ model User {
   name      String   @db.Text
   email     String   @db.Text
   password  String   @db.Text
+  confirm   String   @db.Text
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
 }
