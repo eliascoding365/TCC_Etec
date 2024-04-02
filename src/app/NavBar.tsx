@@ -2,9 +2,9 @@
 import React from 'react'
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PiHouseLine } from "react-icons/pi";
+import { PiHouseLine, PiPlus } from "react-icons/pi";
+import { PiUserCircle } from "react-icons/pi";
 import { PiBooks } from "react-icons/pi";
-import { PiSuitcase } from "react-icons/pi";
 import { PiCodepenLogo } from "react-icons/pi";
 import ButtonOpenModalCreateVaga from "./components/ButtonOpenModalCreateVaga/ButtonOpenModalCreateVaga";
 import classnames from "classnames";
@@ -14,9 +14,10 @@ import classnames from "classnames";
 const NavBar = () => {
   const currentPath = usePathname()
   const links = [
-    { label: 'Home'  , href: '/',      icon: <PiHouseLine size={'25px'} />},
-    { label: 'Sobre' , href: '/sobre', icon: <PiBooks size={'25px'}/>},
-    //{ label: 'Add'   , href: '/',      icon: <PiPlus size={'25px'}/>}
+    { label: 'Home'    ,href: '/',          icon: <PiHouseLine size={'25px'} />},
+    { label: 'About'   ,href: '/sobre',     icon: <PiBooks size={'25px'}/>},
+    { label: 'Account' , href: '/register', icon: <PiUserCircle size={'25px'}/>},
+    //{ label: 'Add'   , href: '#',      icon: <PiPlus size={'25px'}/>}
   ]
   return (
     <nav className='flex justify-between bg-blue-600 space-x-8 border-b px-32 h-14 items-center'>

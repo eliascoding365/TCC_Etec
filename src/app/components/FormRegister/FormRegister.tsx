@@ -45,15 +45,15 @@ const RegisterForm = () => {
         <Input id="password" {...register('password')} required type="password" />
       </div>
       <div className="flex items-center mt-8 mb-4">
-        <Checkbox id="terms" />
+        <Checkbox id="terms" required />
         <Label className="ml-2 leading-none" htmlFor="terms">
-          I agree to the
-          <Link className="underline" href="#">
-            terms and conditions
+          Eu concordo com os <Label/>
+          <Link className="underline" target="_blank" href="/agreement-terms">
+            termos de VagaNet
           </Link>
         </Label>
       </div>
-      <Button className="w-full">Register</Button>
+      <Button className="w-full bg-blue-600">Register</Button>
       </form>
     </div>
   )
