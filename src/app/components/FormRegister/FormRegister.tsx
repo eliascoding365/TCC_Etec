@@ -11,7 +11,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useForm } from 'react-hook-form'
 import axios from "axios"
-import { ZodType,  z } from "zod"
+import { ZodType, z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface RegisterUserProps {
@@ -34,11 +34,11 @@ const schema: ZodType<RegisterUserProps> = z.object
 
 
 const RegisterForm = () => {
-  const { 
+  const {
     register,
-     handleSubmit,
-     formState:{errors},
-    } = useForm<RegisterUserProps>({
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterUserProps>({
     resolver: zodResolver(schema)
   })
 
@@ -51,13 +51,13 @@ const RegisterForm = () => {
       >
 
         <div className="space-y-2 text-center">
-          <h1 className="text-3xl font-bold">Register</h1>
+            <span className="text-3xl font-bold">Registrar em <span className="text-3xl border-b-[3px] border-black">VagaNet</span></span>
           <p className="text-gray-500 dark:text-gray-400">Enter your information to create an account</p>
         </div>
         <div className="space-y-2">
           <Label htmlFor="name">Name</Label>
           <Input id="name" {...register('name')} placeholder="Seu nome" required />
-          {errors.name && <span className='text-red-400 text-sm'>{errors.name.message}</span>}
+          {errors.name && <div className="bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><span className='text-red-400 text-xs'>{errors.name.message}</span></div>}
         </div>
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -70,18 +70,18 @@ const RegisterForm = () => {
         <div className="space-y-2">
           <Label htmlFor="password">Confirm password</Label>
           <Input id="confirm" {...register('confirm')} required type="password" />
-          {errors.confirm && <span className='text-red-400 text-sm'>{errors.confirm.message}</span>}
+          {errors.confirm && <div className="bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><span className='text-red-400 text-xs'>{errors.confirm.message}</span></div>}
         </div>
         <div className="flex items-center mt-8 mb-4">
           <Checkbox id="terms" required />
           <Label className="ml-2 leading-none" htmlFor="terms">
             Eu concordo com os <Label />
-            <Link className="underline" target="_blank" href="/agreement-terms">
+            <Link className="underline" href="/agreement-terms">
               termos de VagaNet
             </Link>
           </Label>
         </div>
-        <Button className="w-full bg-blue-600">Register</Button>
+        <Button className="w-full bg-blue-600 hover:bg-blue-500 transition-colors">Registrar</Button>
       </form>
     </div>
   )
