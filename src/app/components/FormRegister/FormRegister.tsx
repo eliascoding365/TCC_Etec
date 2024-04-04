@@ -11,47 +11,44 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useForm } from 'react-hook-form'
 import axios from "axios"
-import { ZodType, z } from "zod"
+import {  z } from "zod"
+import { redirect, useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod";
+import { registerUserSchema } from "@/app/validationSchemas"
+import { getServerSession } from "next-auth";
 
-interface RegisterUserProps {
-  name: string,
-  email: string,
-  password: string,
-  confirm: string,
-}
+type RegisterFormSchema = z.infer<typeof registerUserSchema> //isso vai ligar o schema com a interface, sem ter que alterar os dois, apenas um
 
-const schema: ZodType<RegisterUserProps> = z.object
-  ({
-    name: z.string().min(3),
-    email: z.string().min(3),
-    password: z.string().min(2),
-    confirm: z.string().min(3),
-  }).refine((data) => data.password === data.confirm, {
-    message: "Senhas divergentes",
-    path: ["confirm"],
-  });
+export default  function FormRegister (){
+  
+  
+  const router = useRouter()
 
-
-const RegisterForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterUserProps>({
-    resolver: zodResolver(schema)
+  } = useForm<RegisterFormSchema>({
+    resolver: zodResolver(registerUserSchema)
   })
+  
+  const onSubmit = async (data: RegisterFormSchema) => {
+    try {
+      await axios.post('api/register', data);
+      router.back(); 
+    } catch (error) {
+      console.error("Error submitting form:", error);
+    }
+  };
 
   return (
     <div className="mx-auto my-20 max-w-sm space-y-6">
       <form
-        onSubmit={handleSubmit(async (data: RegisterUserProps) =>
-          await axios.post('api/register', data)
-        )}
+        onSubmit={handleSubmit(onSubmit)}
       >
 
         <div className="space-y-2 text-center">
-            <span className="text-3xl font-bold">Registrar em <span className="text-3xl border-b-[3px] border-black">VagaNet</span></span>
+          <span className="text-3xl font-bold">Registrar em <span className="text-3xl border-b-[4px] border-black">VagaNet</span></span>
           <p className="text-gray-500 dark:text-gray-400">Enter your information to create an account</p>
         </div>
         <div className="space-y-2">
@@ -86,4 +83,3 @@ const RegisterForm = () => {
     </div>
   )
 }
-export default RegisterForm

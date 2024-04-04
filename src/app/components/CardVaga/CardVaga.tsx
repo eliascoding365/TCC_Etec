@@ -16,17 +16,19 @@ import CardVagaExpandMore from './CardVagaExpandMore';
 import { Container } from '@mui/material';
 
 export default async function CardVaga() {
-  const vaga = await prisma.vaga.findMany()
+  const vagas = await prisma.vaga.findMany()
+  const user = await prisma.user.findMany()
 
+  
   return (
     <div className='flex justify-center'>
       <Container  className='flex flex-col w-auto h-auto m-8 justify-center' >
-        {vaga.map(vagas =>
-          <Card sx={{ maxWidth: 345 }} className='mb-4'key={vagas.id}>
+        {vagas.map((vaga, index) => (
+          <Card sx={{ maxWidth: 345 }} className='mb-4' key={vaga.id}>
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                  R
+                  {user[index].name[0]} {/* Primeira letra do nome do usuário */}
                 </Avatar>
               }
               action={
@@ -34,8 +36,8 @@ export default async function CardVaga() {
                   <MoreVertIcon />
                 </IconButton>
               }
-              title={vagas.name}
-              subheader={vagas.createdAt.toDateString()}
+              title={user[index].name}
+              subheader={vaga.createdAt.toDateString()}
             />
             <CardMedia
               component="img"
@@ -45,7 +47,7 @@ export default async function CardVaga() {
             />
             <CardContent>
               <Typography variant="body1" color="text.primary">
-                {vagas.description}
+                {vaga.description}
               </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -56,14 +58,11 @@ export default async function CardVaga() {
                 <ShareIcon />
               </IconButton>
             </CardActions>
-            <CardVagaExpandMore
-            
-            >
-              numero:{vagas.description}
+            <CardVagaExpandMore>
+              numero:{vaga.description}
             </CardVagaExpandMore>
-
           </Card>
-        )}
+        ))}
       </Container>
     </div>
   );
