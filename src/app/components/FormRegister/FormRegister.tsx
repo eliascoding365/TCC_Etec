@@ -47,29 +47,29 @@ export default  function FormRegister (){
         onSubmit={handleSubmit(onSubmit)}
       >
 
-        <div className="space-y-2 text-center">
+        <div className="space-y-2 text-center mb-10">
           <span className="text-3xl font-bold">Registrar em <span className="text-3xl border-b-[4px] border-black">VagaNet</span></span>
           <p className="text-gray-500 dark:text-gray-400">Enter your information to create an account</p>
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 mb-2">
           <Label htmlFor="name">Name</Label>
           <Input id="name" {...register('name')} placeholder="Seu nome" required />
           {errors.name && <div className="bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><span className='text-red-400 text-xs'>{errors.name.message}</span></div>}
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 mb-6">
           <Label htmlFor="email">Email</Label>
           <Input id="email" {...register('email')} placeholder="Seu email" required />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 mb-2">
           <Label htmlFor="password">Password</Label>
           <Input id="password" {...register('password')} required type="password" />
         </div>
-        <div className="space-y-2">
+        <div className="space-y-2 mb-6">
           <Label htmlFor="password">Confirm password</Label>
           <Input id="confirm" {...register('confirm')} required type="password" />
           {errors.confirm && <div className="bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><span className='text-red-400 text-xs'>{errors.confirm.message}</span></div>}
         </div>
-        <div className="flex items-center mt-8 mb-4">
+        <div className="flex items-center mt-8 mb-6">
           <Checkbox id="terms" required />
           <Label className="ml-2 leading-none" htmlFor="terms">
             Eu concordo com os <Label />

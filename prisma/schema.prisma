@@ -24,7 +24,7 @@ model Vaga {
 model User {
   id        Int      @id @default(autoincrement())
   name      String   @db.Text
-  email     String   @db.Text
+  email     String   @db.Text @unique
   password  String   @db.Text
   confirm   String   @db.Text
   createdAt DateTime @default(now())
