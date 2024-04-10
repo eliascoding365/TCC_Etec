@@ -27,13 +27,14 @@ const Form = () => {
   const onSubmit = async (data: LoginFormSchema) => {
     
     try {
-      await signIn("credentials", {
+      const response = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
       });
+      console.log(response)
     } catch (error) {
-      console.error('Login failed', error)
+      console.error('Login failed')
     }
   }
 

@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useRef, useState } from 'react';
 import { PiPlus } from "react-icons/pi";
 import FormVaga from './FormVaga';

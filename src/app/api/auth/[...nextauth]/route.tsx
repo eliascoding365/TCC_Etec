@@ -19,34 +19,27 @@ const handler = NextAuth({
           password: { },
         },
         async authorize(credentials, req) {
-            console.log(credentials)
             // Aqui você faria a chamada para sua API para verificar as credenciais
             if (!credentials?.email || !credentials?.password) return null
-            const response = await fetch('api/login', {
-             
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(credentials),
-            });
+
             const getUser = await prisma.user.findUnique({
               where: { email: credentials.email}
             })!;
 
             if (!getUser) {
                 console.log("Email não existente")
-              return null;
+              return getUser;
           }
 
             const unhashPassword = await bcrypt.compare(credentials.password , getUser.password)
-            const data = await response.json();
-            
-            if (response.ok) {
-              return data
-            } else {
-              return null;
+            console.log(unhashPassword)
+            if (unhashPassword){
+              return {
+                id: getUser.id,
+                email: getUser.email
+              }
             }
+            return null
           },
         }),
       ],
