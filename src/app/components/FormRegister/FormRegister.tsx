@@ -12,17 +12,18 @@ import { Button } from "@/components/ui/button"
 import { useForm } from 'react-hook-form'
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import axios from "axios"
-import {  z } from "zod"
+import { z } from "zod"
 import { redirect, useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerUserSchema } from "@/app/validationSchemas"
 import { getServerSession } from "next-auth";
+import ErrorMessage from "../ErrorMessage"
 
 type RegisterFormSchema = z.infer<typeof registerUserSchema> //isso vai ligar o schema com a interface, sem ter que alterar os dois, apenas um
 
-export default  function FormRegister (){
-  
-  
+export default function FormRegister() {
+
+
   const router = useRouter()
 
   const {
@@ -32,16 +33,16 @@ export default  function FormRegister (){
   } = useForm<RegisterFormSchema>({
     resolver: zodResolver(registerUserSchema)
   })
-  
+
   const onSubmit = async (data: RegisterFormSchema) => {
     try {
       await axios.post('api/register', data);
-      router.back(); 
+      router.back();
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
-  
+
 
   return (
     <div className="mx-auto my-20 max-w-sm space-y-6">
@@ -55,26 +56,34 @@ export default  function FormRegister (){
         </div>
         <div className="space-y-2 mb-2">
           <Label htmlFor="name">Name</Label>
-          <Input id="name" {...register('name')} placeholder="Seu nome"  />
-          {errors.name && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.name.message}</span></div>}
+          <Input id="name" {...register('name')} placeholder="Seu nome" />
+          <ErrorMessage>
+            {errors.name?.message}
+          </ErrorMessage>
         </div>
         <div className="space-y-2 mb-6">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" {...register('email')} placeholder="Seu email"  />
-          {errors.email && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.email.message}</span></div>}
+          <Input id="email" {...register('email')} placeholder="Seu email" />
+          <ErrorMessage>
+            {errors.email?.message}
+          </ErrorMessage>
         </div>
         <div className="space-y-2 mb-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" {...register('password')}  type="password" />
-          {errors.password && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.password.message}</span></div>}
+          <Input id="password" {...register('password')} type="password" />
+          <ErrorMessage>
+            {errors.password?.message}
+          </ErrorMessage>
         </div>
         <div className="space-y-2 mb-6">
           <Label htmlFor="password">Confirm password</Label>
-          <Input id="confirm" {...register('confirm')}  type="password" />
-          {errors.confirm && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.confirm.message}</span></div>}
+          <Input id="confirm" {...register('confirm')} type="password" />
+          <ErrorMessage>
+            {errors.confirm?.message}
+          </ErrorMessage>
         </div>
         <div className="flex items-center mt-8 mb-6">
-          <Checkbox id="terms"  />
+          <Checkbox id="terms" />
           <Label className="ml-2 leading-none" htmlFor="terms">
             Eu concordo com os <Label />
             <Link className="underline" href="/agreement-terms">
