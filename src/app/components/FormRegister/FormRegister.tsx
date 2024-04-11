@@ -18,6 +18,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { registerUserSchema } from "@/app/validationSchemas"
 import { getServerSession } from "next-auth";
 import ErrorMessage from "../ErrorMessage"
+import Spinner from "../Spinner"
+import { useState } from "react"
 
 type RegisterFormSchema = z.infer<typeof registerUserSchema> //isso vai ligar o schema com a interface, sem ter que alterar os dois, apenas um
 
@@ -34,11 +36,16 @@ export default function FormRegister() {
     resolver: zodResolver(registerUserSchema)
   })
 
+  const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   const onSubmit = async (data: RegisterFormSchema) => {
     try {
+      setIsSubmitting(true)
       await axios.post('api/register', data);
       router.back();
     } catch (error) {
+      setIsSubmitting(false)
       console.error("Error submitting form:", error);
     }
   };
@@ -91,7 +98,10 @@ export default function FormRegister() {
             </Link>
           </Label>
         </div>
-        <Button className="w-full bg-blue-600 hover:bg-blue-500 transition-colors">Registrar</Button>
+        <Button disabled={isSubmitting} className="flex items-center justify-center
+        w-full bg-blue-600 hover:bg-blue-500 transition-colors ">
+          Registrar {isSubmitting && <Spinner/>}
+          </Button>
       </form>
     </div>
   )
