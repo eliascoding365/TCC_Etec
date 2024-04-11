@@ -39,16 +39,16 @@ const ButtonOpenModalCreateVaga = () => {
     return (
         <div>
             <div className="
-            flex flex-col justify-center items-center
+            flex justify-center items-center
             text-xs font-medium
             text-white opacity-60 hover:text-white hover:opacity-100 transition-opacity">
                 <button
-                    className="btn"
+                    className="flex flex-col btn items-center"
                     onClick={openModal}
                     onChange={closeModal}
                 >
                     <PiPlus size={'25px'} />
-                    <span>Add</span>
+                    <span>Criar</span>
                 </button>
             </div>
             {isOpen && (

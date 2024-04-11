@@ -9,7 +9,7 @@ import { PiCodepenLogo } from "react-icons/pi";
 import ButtonOpenModalCreateVaga from "./components/ButtonOpenModalCreateVaga/ButtonOpenModalCreateVaga";
 import classnames from "classnames";
 import { Session } from 'next-auth';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth/next';
 
 
 const NavBar = () => {
@@ -19,7 +19,7 @@ const NavBar = () => {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const sessionData = await getSession(); // Fetch session from the server
+        const sessionData = await getServerSession(); // Fetch session from the server
         setSession(sessionData);
         console.log(sessionData)
       } catch (error) {
@@ -31,10 +31,10 @@ const NavBar = () => {
   }, []);
 
   const links = [
-    { label: 'Home', href: '/', icon: <PiHouseLine size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
-    { label: 'About', href: '/sobre', icon: <PiBooks size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
-    { label: 'Account', href: '/user', icon: <PiUserCircle size={'25px'} />, showWhenLoggedIn: true , showWhenLoggedOut: true },
-    { label: '', href: '', icon: <ButtonOpenModalCreateVaga />, showIcon: currentPath === '/', showWhenLoggedIn: true }
+    { label: 'Ínicio', href: '/', icon: <PiHouseLine size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
+    { label: 'Sobre', href: '/sobre', icon: <PiBooks size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
+    { label: 'Conta', href: '/user', icon: <PiUserCircle size={'25px'} />, showWhenLoggedIn: true , showWhenLoggedOut: true },
+    //{ label: '', href: '', icon: <ButtonOpenModalCreateVaga />, showIcon: currentPath === '/', showWhenLoggedOut: true }
   ];
 
   return (
@@ -44,8 +44,7 @@ const NavBar = () => {
         {links.map(link => {
           // Check if link should be shown based on authentication status and current path
           if (
-            ((session && link.showWhenLoggedIn) || (!session && link.showWhenLoggedOut)) ||
-            (link.href === '/' && link.showIcon)
+            ((session && link.showWhenLoggedIn) || (!session && link.showWhenLoggedOut)) 
           ) {
             return (
               <Link
@@ -66,6 +65,7 @@ const NavBar = () => {
           }
           return null; // Return null for links that shouldn't be shown
         })}
+        <ButtonOpenModalCreateVaga/>
         
       </ul>
     </nav>

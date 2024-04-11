@@ -13,11 +13,16 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import prisma from '../../../../prisma/client';
 import CardVagaExpandMore from './CardVagaExpandMore';
-import { Container } from '@mui/material';
+import { Container, colors } from '@mui/material';
+import { createTheme } from '@mui/material/styles';
+
+
 
 export default async function CardVaga() {
   const vagas = await prisma.vaga.findMany()
   const user = await prisma.user.findMany()
+
+
 
   
   return (
@@ -28,16 +33,14 @@ export default async function CardVaga() {
             <CardHeader
               avatar={
                 <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                  {user[index].name[0]} {/* Primeira letra do nome do usuário */}
                 </Avatar>
               }
               action={
-                <IconButton aria-label="settings">
+                <IconButton aria-label="settings" >
                   <MoreVertIcon />
                 </IconButton>
               }
-              title={user[index].name}
-              subheader={vaga.createdAt.toDateString()}
+              subheader={vaga.createdAt.toLocaleDateString()}
             />
             <CardMedia
               component="img"
@@ -46,20 +49,18 @@ export default async function CardVaga() {
               alt="Temos vagas"
             />
             <CardContent>
-              <Typography variant="body1" color="text.primary">
-                {vaga.description}
-              </Typography>
+             
             </CardContent>
             <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
+              <IconButton aria-label="add to favorites" sx={{ color: red[500] }}>
+                <FavoriteIcon  />
               </IconButton>
               <IconButton aria-label="share">
                 <ShareIcon />
               </IconButton>
             </CardActions>
-            <CardVagaExpandMore>
-              numero:{vaga.description}
+            <CardVagaExpandMore >
+              informações: {vaga.description}
             </CardVagaExpandMore>
           </Card>
         ))}
@@ -67,3 +68,4 @@ export default async function CardVaga() {
     </div>
   );
 }
+

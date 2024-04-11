@@ -42,7 +42,7 @@ const Form = () => {
     <div className="mx-auto my-20 max-w-sm h-full space-y-6">
       <CardHeader className="text-center pb-0 mb-4">
         <CardTitle className="text-3xl font-bold">Login</CardTitle>
-        <CardDescription>Enter your email below to login to your account.</CardDescription>
+        <CardDescription>Entre com seu email abaixo para logar com sua conta.</CardDescription>
       </CardHeader>
       <form
         className="space-y-4"
@@ -58,7 +58,7 @@ const Form = () => {
           />
         </div>
         <div className="space-y-2">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Senha</Label>
           <Input
             id="password"
             type="password"

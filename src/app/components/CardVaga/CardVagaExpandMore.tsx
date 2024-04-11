@@ -53,7 +53,6 @@ return (
     </CardActions>
     <Collapse in={expanded} timeout="auto" unmountOnExit>
       <CardContent>
-        <Typography paragraph>Informações:</Typography>
         <Typography paragraph>
           {children}
         </Typography>
