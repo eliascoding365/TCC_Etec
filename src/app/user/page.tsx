@@ -1,13 +1,27 @@
 import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { redirect, useRouter } from 'next/navigation'
+import Logout from '../logout'
+
+  
+  
+
 
 const UserPage = async() => {
   const session = await getServerSession()
-  if (session) {
+  
+  if (!session) {
+    redirect("/login")
   }
+
   return (
-    <div>UsersPage</div>
+    <div className='flex flex-col items-center mt-10'>
+      <div>You are signed as </div>
+      <div>
+        <Logout/>
+      </div>
+    </div>
+
   )
 }
 

@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { signIn } from 'next-auth/react'
 import { loginUserSchema } from "@/app/validationSchemas"
 import { z } from "zod"
+import { useRouter } from 'next/navigation';
 
 type LoginFormSchema = z.infer<typeof loginUserSchema>
 
@@ -23,6 +24,7 @@ const Form = () => {
   } = useForm<LoginFormSchema>({
     resolver: zodResolver(loginUserSchema)
   })
+  const router = useRouter()
 
   const onSubmit = async (data: LoginFormSchema) => {
     
@@ -32,11 +34,17 @@ const Form = () => {
         password: data.password,
         redirect: false,
       });
+      if (response?.ok === true){
+        router.refresh();
+      }
+
       console.log(response)
     } catch (error) {
       console.error('Login failed')
     }
+    
   }
+  
 
   return (
     <div className="mx-auto my-20 max-w-sm h-full space-y-6">

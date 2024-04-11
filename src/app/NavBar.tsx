@@ -9,7 +9,7 @@ import { PiCodepenLogo } from "react-icons/pi";
 import ButtonOpenModalCreateVaga from "./components/ButtonOpenModalCreateVaga/ButtonOpenModalCreateVaga";
 import classnames from "classnames";
 import { Session } from 'next-auth';
-import { getServerSession } from 'next-auth/next';
+import { getSession } from 'next-auth/react';
 
 
 const NavBar = () => {
@@ -19,7 +19,7 @@ const NavBar = () => {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const sessionData = await getServerSession(); // Fetch session from the server
+        const sessionData = await getSession(); // Fetch session from the server
         setSession(sessionData);
         console.log(sessionData)
       } catch (error) {
@@ -34,7 +34,7 @@ const NavBar = () => {
     { label: 'Ínicio', href: '/', icon: <PiHouseLine size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
     { label: 'Sobre', href: '/sobre', icon: <PiBooks size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
     { label: 'Conta', href: '/user', icon: <PiUserCircle size={'25px'} />, showWhenLoggedIn: true , showWhenLoggedOut: true },
-    //{ label: '', href: '', icon: <ButtonOpenModalCreateVaga />, showIcon: currentPath === '/', showWhenLoggedOut: true }
+    { label: '', href: '', icon: <ButtonOpenModalCreateVaga />, showIcon: currentPath === '/', showWhenLoggedIn: true }
   ];
 
   return (
@@ -65,7 +65,6 @@ const NavBar = () => {
           }
           return null; // Return null for links that shouldn't be shown
         })}
-        <ButtonOpenModalCreateVaga/>
         
       </ul>
     </nav>
