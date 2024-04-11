@@ -10,6 +10,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { useForm } from 'react-hook-form'
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import axios from "axios"
 import {  z } from "zod"
 import { redirect, useRouter } from "next/navigation"
@@ -40,6 +41,7 @@ export default  function FormRegister (){
       console.error("Error submitting form:", error);
     }
   };
+  
 
   return (
     <div className="mx-auto my-20 max-w-sm space-y-6">
@@ -53,24 +55,26 @@ export default  function FormRegister (){
         </div>
         <div className="space-y-2 mb-2">
           <Label htmlFor="name">Name</Label>
-          <Input id="name" {...register('name')} placeholder="Seu nome" required />
-          {errors.name && <div className="bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><span className='text-red-400 text-xs'>{errors.name.message}</span></div>}
+          <Input id="name" {...register('name')} placeholder="Seu nome"  />
+          {errors.name && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.name.message}</span></div>}
         </div>
         <div className="space-y-2 mb-6">
           <Label htmlFor="email">Email</Label>
-          <Input id="email" {...register('email')} placeholder="Seu email" required />
+          <Input id="email" {...register('email')} placeholder="Seu email"  />
+          {errors.email && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.email.message}</span></div>}
         </div>
         <div className="space-y-2 mb-2">
           <Label htmlFor="password">Password</Label>
-          <Input id="password" {...register('password')} required type="password" />
+          <Input id="password" {...register('password')}  type="password" />
+          {errors.password && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.password.message}</span></div>}
         </div>
         <div className="space-y-2 mb-6">
           <Label htmlFor="password">Confirm password</Label>
-          <Input id="confirm" {...register('confirm')} required type="password" />
-          {errors.confirm && <div className="bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><span className='text-red-400 text-xs'>{errors.confirm.message}</span></div>}
+          <Input id="confirm" {...register('confirm')}  type="password" />
+          {errors.confirm && <div className="flex items-center bg-red-100 bg-opacity-70 p-2 border rounded-md border-red-400"><HiOutlineExclamationCircle size={'11px'} color="red"/><span className='ml-2 text-red-400 text-xs'>{errors.confirm.message}</span></div>}
         </div>
         <div className="flex items-center mt-8 mb-6">
-          <Checkbox id="terms" required />
+          <Checkbox id="terms"  />
           <Label className="ml-2 leading-none" htmlFor="terms">
             Eu concordo com os <Label />
             <Link className="underline" href="/agreement-terms">

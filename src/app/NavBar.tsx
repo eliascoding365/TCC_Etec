@@ -34,7 +34,7 @@ const NavBar = () => {
     { label: 'Ínicio', href: '/', icon: <PiHouseLine size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
     { label: 'Sobre', href: '/sobre', icon: <PiBooks size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
     { label: 'Conta', href: '/user', icon: <PiUserCircle size={'25px'} />, showWhenLoggedIn: true , showWhenLoggedOut: true },
-    { label: '', href: '', icon: <ButtonOpenModalCreateVaga />, showIcon: currentPath === '/', showWhenLoggedIn: true }
+    //{ label: '', href: '', icon: <ButtonOpenModalCreateVaga />, showIcon: currentPath === '/', showWhenLoggedIn: true }
   ];
 
   return (
@@ -65,7 +65,7 @@ const NavBar = () => {
           }
           return null; // Return null for links that shouldn't be shown
         })}
-        
+        <ButtonOpenModalCreateVaga />
       </ul>
     </nav>
   );
