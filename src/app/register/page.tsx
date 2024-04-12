@@ -1,11 +1,11 @@
 import React from 'react'
 import RegisterForm from '../components/FormRegister/FormRegister'
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth/next'
 import Router from 'next/router'
 import { redirect } from 'next/navigation'
 
 const RegisterPage = async () => {
-  const session = await getSession()
+  const session = await getServerSession()
   if (session) {
     redirect("/")
   }
