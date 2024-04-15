@@ -21,7 +21,8 @@ const NavBar = () => {
       try {
         const sessionData = await getSession(); // Fetch session from the server
         setSession(sessionData);
-        console.log(sessionData)
+        console.log(sessionData?.user.id)
+        console.log(sessionData?.user)
       } catch (error) {
         console.error('Error fetching server session:', error);
       }

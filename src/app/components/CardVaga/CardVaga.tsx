@@ -19,9 +19,15 @@ import { createTheme } from '@mui/material/styles';
 
 
 export default async function CardVaga() {
-  const vagas = await prisma.vaga.findMany()
-  const user = await prisma.user.findMany()
-
+    const vagas = await prisma.vaga.findMany({
+      include: {
+        createdBy: {
+          select: {
+            name: true // Select the name field of the createdBy relation
+          }
+        }
+      }
+    });
 
 
   
@@ -41,6 +47,7 @@ export default async function CardVaga() {
                 </IconButton>
               }
               subheader={vaga.createdAt.toLocaleDateString()}
+              title={vaga.createdBy.name}
             />
             <CardMedia
               component="img"
