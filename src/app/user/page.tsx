@@ -16,7 +16,7 @@ const UserPage = async() => {
 
   return (
     <div className='flex flex-col items-center mt-10'>
-      <div>You are signed as {session.user?.email}</div>
+      <div>Você esta conectado como {session.user?.email}</div>
       <div>
         <Logout/>
       </div>
