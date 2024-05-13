@@ -86,7 +86,9 @@ export default function FormRegister() {
           <Label htmlFor="password">Confirm password</Label>
           <Input id="confirm" {...register('confirm')} type="password" />
           <ErrorMessage>
-            {errors.confirm?.message}
+            {errors.password && errors.confirm && errors.password.message !== errors.confirm.message && (
+              <p>Password and Confirm Password do not match</p>
+            )}
           </ErrorMessage>
         </div>
         <div className="flex items-center mt-8 mb-6">
@@ -100,8 +102,8 @@ export default function FormRegister() {
         </div>
         <Button disabled={isSubmitting} className="flex items-center justify-center
         w-full bg-blue-600 hover:bg-blue-500 transition-colors ">
-          Registrar {isSubmitting && <Spinner/>}
-          </Button>
+          Registrar {isSubmitting && <Spinner />}
+        </Button>
       </form>
     </div>
   )
