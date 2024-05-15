@@ -22,14 +22,14 @@ Junte-se a nós nesta jornada emocionante enquanto continuamos a conectar talent
         <p id="descTt">Alex é um entusiasta da tecnologia com experiência em liderar equipes de desenvolvimento de produtos inovadores.
         Ele está comprometido em criar uma plataforma robusta e intuitiva que atenda às necessidades de nossos usuários.</p>
         <p id="nomes">Elias Montan</p>
-        <p id="descTt">Elias é um entusiasta da tecnologia com experiência em liderar equipes de desenvolvimento de produtos inovadores.
-        Ele está comprometido em criar uma plataforma robusta e intuitiva que atenda às necessidades de nossos usuários.</p>
+        <p id="descTt">Profissional de desenvolvimento web focado em desenvolver interfaces intuitivas e responsivas. Com habilidades em design e programação, 
+        busco integrar tecnologias emergentes para proporcionar experiências de usuário excepcionais.</p>
         <p id="nomes">Adilson Santos</p>
-        <p id="descTt">Adilson é um entusiasta da tecnologia com experiência em liderar equipes de desenvolvimento de produtos inovadores.
-        Ele está comprometido em criar uma plataforma robusta e intuitiva que atenda às necessidades de nossos usuários.</p>
+        <p id="descTt">Desenvolvedor web apaixonado por transformar ideias criativas em realidade digital. Com experiência em projetos diversos, 
+        estou sempre em busca de soluções inovadoras e escaláveis para atender às necessidades dos clientes e usuários finais.</p>
         <p id="nomes">Italo Borges</p>
-        <p id="descTt">Italo é um entusiasta da tecnologia com experiência em liderar equipes de desenvolvimento de produtos inovadores.
-        Ele está comprometido em criar uma plataforma robusta e intuitiva que atenda às necessidades de nossos usuários.</p>
+        <p id="descTt">Entusiasta de tecnologia com expertise em desenvolvimento web e móvel. Comprometido com a entrega de produtos de alta qualidade, 
+        busco constantemente aprimorar minhas habilidades técnicas e acompanhar as melhores práticas da indústria.</p>
     </div>
 </>
   )

@@ -11,7 +11,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   console.log(session)
   try {
     if (!session || !session.user || !session.user.email) {
-      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
+      return NextResponse.json({ error: 'Usuário não encontrada' }, { status: 401 });
     }
 
     const body = await request.json()

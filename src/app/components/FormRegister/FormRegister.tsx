@@ -59,10 +59,10 @@ export default function FormRegister() {
 
         <div className="space-y-2 text-center mb-10">
           <span className="text-3xl font-bold">Registrar em <span className="text-3xl border-b-[4px] border-black">VagaNet</span></span>
-          <p className="text-gray-500 dark:text-gray-400">Enter your information to create an account</p>
+          <p className="text-gray-500 dark:text-gray-400">Entre com suas informações para cadastro</p>
         </div>
         <div className="space-y-2 mb-2">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">Nome</Label>
           <Input id="name" {...register('name')} placeholder="Seu nome" />
           <ErrorMessage>
             {errors.name?.message}
@@ -76,14 +76,14 @@ export default function FormRegister() {
           </ErrorMessage>
         </div>
         <div className="space-y-2 mb-2">
-          <Label htmlFor="password">Password</Label>
+          <Label htmlFor="password">Senha</Label>
           <Input id="password" {...register('password')} type="password" />
           <ErrorMessage>
             {errors.password?.message}
           </ErrorMessage>
         </div>
         <div className="space-y-2 mb-6">
-          <Label htmlFor="password">Confirm password</Label>
+          <Label htmlFor="password">Confirme sua senha</Label>
           <Input id="confirm" {...register('confirm')} type="password" />
           <ErrorMessage>
             {errors.confirm?.message}

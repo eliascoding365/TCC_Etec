@@ -1,7 +1,8 @@
 #titulo{
     color: blue;
     font-size: 25px;
-    padding: 25px 0 0 150px;
+    padding: 25px;
+    text-align: center;
 }
 
 #descT{
