@@ -8,11 +8,8 @@ type LoginFormSchema = z.infer<typeof loginUserSchema>
 
 const LoginForm = () => {
 
-
-  
-
   return (
-    <Form/>
+    <Form />
   )
 }
 

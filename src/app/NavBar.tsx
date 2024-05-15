@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PiHouseLine, PiPlus } from "react-icons/pi";
+import { PiHouseLine } from "react-icons/pi";
 import { PiUserCircle } from "react-icons/pi";
 import { PiBooks } from "react-icons/pi";
 import { PiCodepenLogo } from "react-icons/pi";
@@ -10,7 +10,7 @@ import ButtonOpenModalCreateVaga from "./components/ButtonOpenModalCreateVaga/Bu
 import classnames from "classnames";
 import { Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
-
+import prisma from '../../prisma/client';
 
 const NavBar = () => {
   const currentPath = usePathname();
@@ -19,7 +19,7 @@ const NavBar = () => {
   useEffect(() => {
     const fetchSession = async () => {
       try {
-        const sessionData = await getSession(); // Fetch session from the server
+        const sessionData = await getSession(); 
         setSession(sessionData);
         console.log(sessionData?.user.id)
         console.log(sessionData?.user)
@@ -34,8 +34,7 @@ const NavBar = () => {
   const links = [
     { label: 'Ínicio', href: '/', icon: <PiHouseLine size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
     { label: 'Sobre', href: '/sobre', icon: <PiBooks size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
-    { label: 'Conta', href: '/user', icon: <PiUserCircle size={'25px'} />, showWhenLoggedIn: true , showWhenLoggedOut: true },
-    //{ label: '', href: '', icon: <ButtonOpenModalCreateVaga />, showIcon: currentPath === '/', showWhenLoggedIn: true }
+    { label: 'Conta', href: '/user', icon: <PiUserCircle size={'25px'} />, showWhenLoggedIn: true, showWhenLoggedOut: true },
   ];
 
   return (
@@ -43,7 +42,6 @@ const NavBar = () => {
       <Link href="/"> <PiCodepenLogo className='text-white' size={'35px'} /> </Link>
       <ul className='flex  space-x-6'>
         {links.map(link => {
-          // Check if link should be shown based on authentication status and current path
           if (
             ((session && link.showWhenLoggedIn) || (!session && link.showWhenLoggedOut)) 
           ) {
@@ -53,7 +51,7 @@ const NavBar = () => {
                 href={link.href}
                 className={classnames({
                   'text-white': link.href === currentPath,
-                  'text-white opacity-60 ': link.href !== currentPath,
+                  'text-white opacity-60 ': link.href!== currentPath,
                   'hover:opacity-100 text-white transition-opacity': true
                 })}
               >
@@ -64,9 +62,9 @@ const NavBar = () => {
               </Link>
             );
           }
-          return null; // Return null for links that shouldn't be shown
+          return null; 
         })}
-        <ButtonOpenModalCreateVaga />
+        {currentPath === '/' && session?.user && <ButtonOpenModalCreateVaga />}
       </ul>
     </nav>
   );
