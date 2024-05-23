@@ -2,15 +2,24 @@
 import React from 'react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PiHouseLine, PiUserCircle, PiBooks,PiCodepenLogo } from "react-icons/pi";
+import { PiHouseLine, PiUserCircle, PiBooks, PiCodepenLogo } from "react-icons/pi";
 import ButtonOpenModalCreateVaga from "./components/ButtonOpenModalCreateVaga/ButtonOpenModalCreateVaga";
 import classnames from "classnames";
 import { useSession } from 'next-auth/react';
-
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const NavBar = () => {
-  const currentPath = usePathname();
+  return (
+    <nav className='flex justify-between bg-blue-600 space-x-8 border-b px-32 h-14 items-center'>
+      <Link href="/"> <PiCodepenLogo className='text-white' size={'35px'} /> </Link>
+      <NavLinks />
+    </nav>
+  );
+};
 
+const NavLinks = () => {
+  const currentPath = usePathname();
   const { status, data: session } = useSession()
   const links = [
     { label: 'Ínicio', href: '/', icon: <PiHouseLine size={'25px'} /> },
@@ -18,12 +27,12 @@ const NavBar = () => {
     { label: 'Conta', href: '/user', icon: <PiUserCircle size={'25px'} /> },
   ];
 
-  return (
-    <nav className='flex justify-between bg-blue-600 space-x-8 border-b px-32 h-14 items-center'>
-      <Link href="/"> <PiCodepenLogo className='text-white' size={'35px'} /> </Link>
+  if (status === "loading") return <Skeleton />;
 
+  return (
+    <>
       <ul className='flex justify-end space-x-6'>
-      {status === "authenticated" && currentPath === "/" && (<ButtonOpenModalCreateVaga />)}
+        <AuthStatus />
         {links.map((link) => (
           <li key={link.href}>
             <Link
@@ -40,11 +49,17 @@ const NavBar = () => {
               </div>
             </Link>
           </li>
-          
         ))}
       </ul>
-    </nav>
-  );
-};
+    </>
+  )
+}
+const AuthStatus = () => {
+  const { status, data: session } = useSession()
+  const currentPath = usePathname();
 
+  if (status === "authenticated" && currentPath === '/') {
+    return <ButtonOpenModalCreateVaga />
+  }
+}
 export default NavBar;
