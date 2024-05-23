@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Rubik } from "next/font/google";
 import "./globals.css";
 import NavBar from "./NavBar";
-import Head from 'next/head'
+import AuthProvider from "../../auth/Provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +13,7 @@ const poppins = Poppins({
 
 const rubik = Rubik({
   subsets: ['latin'],
-  weight: ['400','500','600']
+  weight: ['400', '500', '600']
 })
 export const metadata: Metadata = {
   title: "TCC",
@@ -32,8 +32,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${rubik.className} `} >
-        <NavBar />
-        <main className="w-screen h-screen">{children}</main>
+        <AuthProvider>
+          <NavBar />
+          <main className="w-screen h-screen">{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );
