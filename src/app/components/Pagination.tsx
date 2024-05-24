@@ -30,7 +30,7 @@ const Pagination = ({
   }
 
   return (
-    <div className='flex items-center gap-2 my-12'>
+    <div className='flex items-center gap-2 mt-4 mb-20'>
       <p>Página: {currentPage} de {pageCount}</p>
       <Button 
       color='gray' 

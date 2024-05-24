@@ -15,10 +15,19 @@ import prisma from '../../../../prisma/client';
 import CardVagaExpandMore from './CardVagaExpandMore';
 import { Container, colors } from '@mui/material';
 import { createTheme } from '@mui/material/styles';
+import Pagination from '../Pagination';
 
+interface Props {
+  searchParams: {
+    page: string
+  }
+}
 
+export default async function CardVaga({searchParams}: Props){
 
-export default async function CardVaga() {
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 4
+
     const vagas = await prisma.vaga.findMany({
       include: {
         createdBy: {
@@ -26,15 +35,16 @@ export default async function CardVaga() {
             name: true // Select the name field of the createdBy relation
           }
         }
-      }
+      },
+      skip: (page-1) * pageSize,
+      take: pageSize
     });
 
-
-  
+    const totalItems = await prisma.vaga.count()
   return (
-    <div className='flex justify-center'>
+    <div className='flex flex-col items-center justify-center'>
       <Container  className='flex flex-col w-auto h-auto m-8 justify-center' >
-        {vagas.map((vaga, index) => (
+        {vagas.map((vaga) => (
           <Card sx={{ maxWidth: 345 }} className='mb-4' key={vaga.id}>
             <CardHeader
               avatar={
@@ -72,6 +82,11 @@ export default async function CardVaga() {
           </Card>
         ))}
       </Container>
+      <Pagination
+      pageSize={pageSize}
+      currentPage={page}
+      itemCount={totalItems}
+      />
     </div>
   );
 }
