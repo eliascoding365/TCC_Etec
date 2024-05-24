@@ -34,7 +34,7 @@ export default function RootLayout({
       <body className={`${rubik.className} `} >
         <AuthProvider>
           <NavBar />
-          <main className="w-screen h-screen">{children}</main>
+          <main className="w-screen h-full">{children}</main>
         </AuthProvider>
       </body>
     </html>
