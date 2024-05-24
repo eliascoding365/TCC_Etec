@@ -15,7 +15,7 @@ const FormVaga = ({ closeModal }: { closeModal: () => void }) => {
     const onSubmit = async (data: VagaForm) => {
         await axios.post('/api/vaga', data);
         closeModal(); 
-        router.push('/')
+        router.refresh();
 
     };
 
