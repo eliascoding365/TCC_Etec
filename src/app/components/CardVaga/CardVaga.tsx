@@ -1,19 +1,10 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import Image from 'next/image';
+import React from 'react'
+import { FaUserCircle } from "react-icons/fa";
+import { FaPen } from "react-icons/fa";
 import prisma from '../../../../prisma/client';
-import CardVagaExpandMore from './CardVagaExpandMore';
-import { Container, colors } from '@mui/material';
 import Pagination from '../Pagination';
+import ComponentExpandMore from './ComponentExpandMore';
 
 interface Props {
   searchParams: {
@@ -21,71 +12,63 @@ interface Props {
   }
 }
 
-export default async function CardVaga({searchParams}: Props){
-
+export default async function CardVaga({ searchParams }: Props) {
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 4
 
-    const vagas = await prisma.vaga.findMany({
-      include: {
-        createdBy: {
-          select: {
-            name: true // Select the name field of the createdBy relation
-          }
+  const vagas = await prisma.vaga.findMany({
+    include: {
+      createdBy: {
+        select: {
+          name: true // Select the name field of the createdBy relation
         }
-      },
-      skip: (page-1) * pageSize,
-      take: pageSize
-    });
+      }
+    },
+    skip: (page - 1) * pageSize,
+    take: pageSize
+  });
 
-    const totalItems = await prisma.vaga.count()
+  const totalItems = await prisma.vaga.count()
   return (
-    <div className='flex flex-col items-center justify-center'>
-      <Container  className='flex flex-col w-auto h-auto m-8 justify-center' >
+    <div className='flex flex-col items-center justify-center mb-4'>
+      <div className='flex flex-col w-auto h-auto m-8 justify-center' >
         {vagas.map((vaga) => (
-          <Card sx={{ maxWidth: 345 }} className='mb-4' key={vaga.id}>
-            <CardHeader
-              avatar={
-                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                </Avatar>
-              }
-              action={
-                <IconButton aria-label="settings" >
-                  <MoreVertIcon />
-                </IconButton>
-              }
-              subheader={vaga.createdAt.toLocaleDateString()}
-              title={vaga.createdBy.name}
-            />
-            <CardMedia
-              component="img"
-              height="194"
-              src="/../../../static/images/cards/temos-vagas.png"
-              alt="Temos vagas"
-            />
-            <CardContent>
-             
-            </CardContent>
-            <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites" sx={{ color: red[500] }}>
-                <FavoriteIcon  />
-              </IconButton>
-              <IconButton aria-label="share">
-                <ShareIcon />
-              </IconButton>
-            </CardActions>
-            <CardVagaExpandMore >
-              informações: {vaga.description}
-            </CardVagaExpandMore>
-          </Card>
+          <div key={vaga.id} className='bg-white p-2 rounded mb-14'>
+            <div className='flex content-around mx-3 mt-5 mb-6'>
+              <div className='mr-3 '><FaUserCircle size={'43px'} /></div>
+              <div>
+                <h1>{vaga.createdBy.name}</h1>
+                <h1>id:{vaga.createdById}</h1>
+              </div>
+              <div className='ml-auto flex items-center'><FaPen /></div>
+            </div>
+            <div className='mx-3 mb-6'>
+              <p>{vaga.name}</p>
+              <Image
+                src="/static/images/cards/temos-vagas.png"
+                width={347}
+                height={287}
+                alt="Picture of the author"
+              />
+              <p>Data published</p>
+              <p>{vaga.createdAt.toLocaleDateString()}</p>
+            </div>
+            <div className='mx-3 flex flex-col items-center'>
+              <p>Expandir</p>
+
+            </div>
+            <div className='mx-3 max-w-60 flex flex-col'>
+              {vaga.description}
+
+            </div>
+          </div>
         ))}
-      </Container>
+      </div>
       <Pagination
-      pageSize={pageSize}
-      currentPage={page}
-      itemCount={totalItems}
+        pageSize={pageSize}
+        currentPage={page}
+        itemCount={totalItems}
       />
     </div>
   );
 }
-
