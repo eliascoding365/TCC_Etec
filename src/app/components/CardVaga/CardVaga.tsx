@@ -5,6 +5,7 @@ import { FaPen } from "react-icons/fa";
 import prisma from '../../../../prisma/client';
 import Pagination from '../Pagination';
 import ComponentExpandMore from './ComponentExpandMore';
+import { getServerSession } from 'next-auth';
 
 interface Props {
   searchParams: {
@@ -13,9 +14,15 @@ interface Props {
 }
 
 export default async function CardVaga({ searchParams }: Props) {
+  const session = await getServerSession();
   const page = parseInt(searchParams.page) || 1;
   const pageSize = 4
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session?.user.email
+    }
 
+  })
   const vagas = await prisma.vaga.findMany({
     include: {
       createdBy: {
@@ -40,7 +47,15 @@ export default async function CardVaga({ searchParams }: Props) {
                 <h1 >{vaga.createdBy.name}</h1>
                 <p className='text-xs font-light'>id:{vaga.createdById}</p>
               </div>
-              <div className='ml-auto flex items-center'><FaPen /></div>
+              <div className='ml-auto flex items-center'>
+                { user?.id  === vaga.createdById &&
+                  <>
+                    <button>
+                      <FaPen />
+                    </button>
+                  </>
+                }
+              </div>
             </div>
             <div className='mx-5 mb-6'>
               <p className='text-md'>{vaga.name}</p>
@@ -56,11 +71,11 @@ export default async function CardVaga({ searchParams }: Props) {
                   {new Date(vaga.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                 </p>
               </div>
-            <div>
+              <div>
                 <ComponentExpandMore>
                   <p className='text-sm font-normal justify-text'>{vaga.description}</p>
                 </ComponentExpandMore>
-            </div>
+              </div>
             </div>
           </div>
         ))}
