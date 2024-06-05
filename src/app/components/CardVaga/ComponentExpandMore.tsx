@@ -13,14 +13,20 @@ const ComponentExpandMore: React.FC<ComponentExpandMoreProps> = ({ children }) =
     setIsExpand(!isExpand)
   }
   return (
-    <div>
-      <button onClick={toggleExpand}><ArrowDownIcon /></button>
+    <div className='flex flex-col h-full'>
+      <button onClick={toggleExpand} className='self-end'>
+        <div className='flex items-center '>
+          <p className='text-sm font-light'>expandir</p>
+          <ArrowDownIcon />
+        </div>
+      </button>
 
       {isExpand && (
-        <div className='p-2 mt-2 bg-gray-100 rounded'>
+        <div className='flex-grow flex flex-col justify-end p-1 mt-2'>
           {children}
         </div>
-      )}</div>
+      )}
+    </div>
   )
 }
 

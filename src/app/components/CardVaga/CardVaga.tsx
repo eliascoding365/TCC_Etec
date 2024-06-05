@@ -50,18 +50,17 @@ export default async function CardVaga({ searchParams }: Props) {
                 height={328}
                 alt="Picture of the author"
               />
-              <div className='flex justify-end'>
+              <div className='flex justify-end mb-4'>
                 <p className='text-xs font-light '>
                   <span className='mr-1'>Data da publicação</span>
                   {new Date(vaga.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
                 </p>
               </div>
+            <div>
+                <ComponentExpandMore>
+                  <p className='text-sm font-normal justify-text'>{vaga.description}</p>
+                </ComponentExpandMore>
             </div>
-            <div className='mx-5 flex flex-col items-center'>
-              <p className='text-sm'>Expandir</p>
-            </div>
-            <div className='mx-5 mb-8 flex flex-col'>
-              <p className='text-sm font-normal justify-text'>{vaga.description}</p>
             </div>
           </div>
         ))}
