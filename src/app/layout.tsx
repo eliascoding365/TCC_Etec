@@ -13,7 +13,6 @@ const poppins = Poppins({
 
 const rubik = Rubik({
   subsets: ['latin'],
-  weight: ['400', '500', '600']
 })
 export const metadata: Metadata = {
   title: "TCC",

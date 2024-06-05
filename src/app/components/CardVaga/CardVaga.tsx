@@ -31,35 +31,37 @@ export default async function CardVaga({ searchParams }: Props) {
   const totalItems = await prisma.vaga.count()
   return (
     <div className='flex flex-col items-center justify-center mb-4'>
-      <div className='flex flex-col w-auto h-auto m-8 justify-center' >
+      <div className='flex flex-col w-auto h-auto max-w-sm m-8 justify-center' >
         {vagas.map((vaga) => (
           <div key={vaga.id} className='bg-white p-2 rounded mb-14'>
-            <div className='flex content-around mx-3 mt-5 mb-6'>
+            <div className='flex content-around mx-5 mt-4 mb-8'>
               <div className='mr-3 '><FaUserCircle size={'43px'} /></div>
               <div>
-                <h1>{vaga.createdBy.name}</h1>
-                <h1>id:{vaga.createdById}</h1>
+                <h1 >{vaga.createdBy.name}</h1>
+                <p className='text-xs font-light'>id:{vaga.createdById}</p>
               </div>
               <div className='ml-auto flex items-center'><FaPen /></div>
             </div>
-            <div className='mx-3 mb-6'>
-              <p>{vaga.name}</p>
+            <div className='mx-5 mb-6'>
+              <p className='text-md'>{vaga.name}</p>
               <Image
                 src="/static/images/cards/temos-vagas.png"
-                width={347}
-                height={287}
+                width={328}  //271
+                height={328}
                 alt="Picture of the author"
               />
-              <p>Data published</p>
-              <p>{vaga.createdAt.toLocaleDateString()}</p>
+              <div className='flex justify-end'>
+                <p className='text-xs font-light '>
+                  <span className='mr-1'>Data da publicação</span>
+                  {new Date(vaga.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+                </p>
+              </div>
             </div>
-            <div className='mx-3 flex flex-col items-center'>
-              <p>Expandir</p>
-
+            <div className='mx-5 flex flex-col items-center'>
+              <p className='text-sm'>Expandir</p>
             </div>
-            <div className='mx-3 max-w-60 flex flex-col'>
-              {vaga.description}
-
+            <div className='mx-5 mb-8 flex flex-col'>
+              <p className='text-sm font-normal justify-text'>{vaga.description}</p>
             </div>
           </div>
         ))}
