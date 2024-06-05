@@ -9,21 +9,22 @@ const handler = NextAuth({
     strategy: "jwt",
     maxAge: 60 * 60,
   },
-  jwt: {  },
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    session: async ({ session, token }) => {
-      if (session?.user) {
-        session.user.id = token.sub;
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token
+        token.id = user?.id
       }
-      return session;
+      return token
     },
-    jwt: async ({ user, token }) => {
-      if (user) {
-        token.uid = user.id;
-      }
-      return token;
-    },
+    session({ session, token }) {
+        // I skipped the line below coz it gave me a TypeError
+        // session.accessToken = token.accessToken;
+        session.user.id = token.id;
+  
+        return session;
+      },
   },
   pages: {
     signIn: "/login"

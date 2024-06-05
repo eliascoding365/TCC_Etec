@@ -1,16 +1,9 @@
-import NextAuth from "next-auth"
-import { User } from "@prisma/client"
+import NextAuth from 'next-auth';
 
-declare module "next-auth" {
-  /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
-   */
+declare module 'next-auth' {
   interface Session {
     user: {
-      /** The user's postal address. */
-      email: string,
-      name: string,
-      id: number
-    }
+      id: string;
+    } & DefaultSession['user'];
   }
 }
