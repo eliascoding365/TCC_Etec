@@ -41,9 +41,9 @@ export default async function CardVaga({ searchParams }: Props) {
 
   return (
     <div className='flex flex-col items-center justify-center mb-4'>
-      <div className='flex flex-col w-auto h-auto max-w-sm m-8 justify-center'>
+      <div className='flex flex-col w-auto h-auto max-w-md m-8 justify-center'>
         {vagas.map((vaga) => (
-          <div key={vaga.id} className='bg-white shadow-sm shadow-slate-300 p-2 rounded mb-14'>
+          <div key={vaga.id} className='bg-white border-gray-200 shadow-sm border p-2 rounded mb-14'>
             <div className='flex content-around mx-5 mt-4 mb-8'>
               <div className='mr-3'><FaUserCircle size={'43px'} /></div>
               <div>
@@ -66,8 +66,8 @@ export default async function CardVaga({ searchParams }: Props) {
               <p className='text-md text-gray-800'>{vaga.name}</p>
               <Image
                 src="/static/images/cards/temos-vagas.png"
-                width={328}
-                height={328}
+                width="400"
+                        height="225"
                 alt="Picture of the author"
               />
               <div className='flex justify-end mb-4'>

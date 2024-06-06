@@ -61,7 +61,7 @@ export default async function UserPage() {
                   <Card key={post.id}>
                     <CardHeader>
                       <img
-                        src="/placeholder.svg"
+                        src="/static/images/cards/temos-vagas.png"
                         width="400"
                         height="225"
                         alt="Post Image"
