@@ -8,11 +8,12 @@ import classnames from "classnames";
 import { useSession } from 'next-auth/react';
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { BsSuitcaseLg } from "react-icons/bs";
 
 const NavBar = () => {
   return (
     <nav className='flex justify-between bg-blue-600 space-x-8 border-b px-32 h-14 items-center'>
-      <Link href="/"> <PiCodepenLogo className='text-white' size={'35px'} /> </Link>
+      <Link href="/"> <BsSuitcaseLg className='text-white' size={'25px'} /> </Link>
       <NavLinks />
     </nav>
   );
