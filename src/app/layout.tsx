@@ -15,10 +15,10 @@ const rubik = Rubik({
   subsets: ['latin'],
 })
 export const metadata: Metadata = {
-  title: "TCC",
+  title: "VagaNet",
   description: "Etec TCC",
   icons: {
-    icon: './favicon.ico'
+    icon: './icon.svg'
   }
 };
 

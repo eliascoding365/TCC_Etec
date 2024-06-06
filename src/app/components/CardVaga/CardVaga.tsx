@@ -42,7 +42,7 @@ export default async function CardVaga({ searchParams }: Props) {
     <div className='flex flex-col items-center justify-center mb-4'>
       <div className='flex flex-col w-auto h-auto max-w-sm m-8 justify-center'>
         {vagas.map((vaga) => (
-          <div key={vaga.id} className='bg-white p-2 rounded mb-14'>
+          <div key={vaga.id} className='bg-white shadow-sm shadow-slate-300 p-2 rounded mb-14'>
             <div className='flex content-around mx-5 mt-4 mb-8'>
               <div className='mr-3'><FaUserCircle size={'43px'} /></div>
               <div>
