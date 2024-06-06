@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import React from 'react'
 import { FaUserCircle } from "react-icons/fa";
-import { FaPen } from "react-icons/fa";
 import prisma from '../../../../prisma/client';
 import Pagination from '../Pagination';
 import ComponentExpandMore from './ComponentExpandMore';
 import { getServerSession } from 'next-auth';
+import BadgeComponent from './Badge';
+import Dropdown from './Dropdown';
 
 interface Props {
   searchParams: {
@@ -46,14 +47,18 @@ export default async function CardVaga({ searchParams }: Props) {
             <div className='flex content-around mx-5 mt-4 mb-8'>
               <div className='mr-3'><FaUserCircle size={'43px'} /></div>
               <div>
-                <h1>{vaga.createdBy.name}</h1>
+                <div className='flex items-center gap-2'>
+                  <h1>{vaga.createdBy.name}</h1>
+                  {session && user?.id === vaga.createdById && (
+                      <BadgeComponent text='Você'/>
+                  )}
+                </div>
                 <p className='text-xs font-light'>id:{vaga.createdById}</p>
               </div>
               <div className='ml-auto flex items-center'>
                 {session && user?.id === vaga.createdById && (
-                  <button>
-                    <FaPen />
-                  </button>
+                      <Dropdown>
+                      </Dropdown>
                 )}
               </div>
             </div>
