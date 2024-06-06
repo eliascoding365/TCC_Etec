@@ -48,7 +48,7 @@ export default async function CardVaga({ searchParams }: Props) {
               <div className='mr-3'><FaUserCircle size={'43px'} /></div>
               <div>
                 <div className='flex items-center gap-2'>
-                  <h1>{vaga.createdBy.name}</h1>
+                  <h1 className='font-semibold'>{vaga.createdBy.name}</h1>
                   {session && user?.id === vaga.createdById && (
                       <BadgeComponent text='Você'/>
                   )}
@@ -63,7 +63,7 @@ export default async function CardVaga({ searchParams }: Props) {
               </div>
             </div>
             <div className='mx-5 mb-6'>
-              <p className='text-md'>{vaga.name}</p>
+              <p className='text-md text-gray-800'>{vaga.name}</p>
               <Image
                 src="/static/images/cards/temos-vagas.png"
                 width={328}
@@ -78,7 +78,7 @@ export default async function CardVaga({ searchParams }: Props) {
               </div>
               <div>
                 <ComponentExpandMore>
-                  <p className='text-sm font-normal justify-text'>{vaga.description}</p>
+                  <p className='text-sm text-gray-600 dark:text-gray-400 line-clamp-2'>{vaga.description}</p>
                 </ComponentExpandMore>
               </div>
             </div>
