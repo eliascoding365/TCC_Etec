@@ -1,36 +1,43 @@
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from '@prisma/client';
-import { NextApiRequest, NextApiResponse } from 'next';
 import { signIn } from 'next-auth/react';
 
 const prisma = new PrismaClient();
 
-export default async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest) {
   if (req.method === 'POST') {
-    const { email, password } = req.body;
+    try {
+      const body = await req.json();
 
-    console.log(email , password)
+      const { email, password } = body;
 
-    const user = await prisma.user.findUnique({
-      where: { email }
-    });
+      if (!email || !password) {
+        return NextResponse.json({ message: 'Email and password are required' }, { status: 400 });
+      }
 
-    if (!user || user.password !== password) {
-      return res.status(401).json({ message: 'Credenciais inválidas' });
+      const user = await prisma.user.findUnique({
+        where: { email }
+      });
+
+      if (!user || user.password !== password) {
+        return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
+      }
+
+      const result = await signIn('credentials', {
+        redirect: false,
+        email,
+        password
+      });
+
+      if (result?.error) {
+        return NextResponse.json({ message: 'Authentication failed' }, { status: 401 });
+      }
+
+      return NextResponse.json({ token: result?.ok }, { status: 200 });
+    } catch (error) {
+      return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
     }
-
-    const result = await signIn('credentials', {
-      redirect: false,
-      email,
-      password
-    });
-
-    if (result?.error) {
-      return res.status(401).json({ message: 'Falha ao autenticar' });
-    }
-
-    return res.status(200).json({ token: result?.ok  });
   } else {
-    return res.status(405).json({ message: 'Método não permitido' });
+    return NextResponse.json({ message: 'Method not allowed' }, { status: 405 });
   }
 }

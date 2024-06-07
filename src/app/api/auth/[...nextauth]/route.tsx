@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "../../../../../prisma/client";
 import { compare } from "bcrypt";
-import bcrypt from "bcrypt"
 
 const handler = NextAuth({
   session: {
@@ -13,55 +12,52 @@ const handler = NextAuth({
   callbacks: {
     jwt({ token, account, user }) {
       if (account) {
-        token.accessToken = account.access_token
-        token.id = user?.id
+        token.accessToken = account.access_token;
+        token.id = user?.id;
       }
-      return token
+      return token;
     },
     session({ session, token }) {
-        // I skipped the line below coz it gave me a TypeError
-        // session.accessToken = token.accessToken;
-        session.user.id = token.id;
-  
-        return session;
-      },
+      session.user.id = token.id;
+      return session;
+    },
   },
   pages: {
-    signIn: "/login"
+    signIn: "/login",
   },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        email: {},
-        password: {},
+        email: { },
+        password: { },
       },
       async authorize(credentials, req) {
-        // Aqui você faria a chamada para sua API para verificar as credenciais
-        if (!credentials?.email || !credentials?.password) return null
+        if (!credentials?.email || !credentials?.password) return null;
 
         const getUser = await prisma.user.findUnique({
           where: { email: credentials.email }
-        })!;
+        });
 
         if (!getUser) {
-          console.log("Email não existente")
-          return getUser;
+          console.log("Email not found");
+          return null;
         }
 
-        const unhashPassword = await bcrypt.compare(credentials.password, getUser.password)
-        console.log(unhashPassword)
-        if (unhashPassword) {
+        const isValidPassword = await compare(credentials.password, getUser.password);
+        console.log(isValidPassword);
+
+        if (isValidPassword) {
           return {
-            id: getUser.id,
-            email: getUser.email
-          }
+            id: getUser.id.toString(),
+            email: getUser.email,
+          };
         }
-        return null
+
+        return null;
       },
     }),
   ],
 });
 
-
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };
