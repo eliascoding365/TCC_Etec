@@ -7,8 +7,8 @@ import prisma from '../../../prisma/client'
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { FaUserCircle } from "react-icons/fa"
+import Image from 'next/image'
 
 export default async function UserPage() {
   const session = await getServerSession()
@@ -60,7 +60,8 @@ export default async function UserPage() {
                 {vagas.map(post => (
                   <Card key={post.id}>
                     <CardHeader>
-                      <img
+                    <h3 className="text-lg font-semibold">{post.name}</h3>
+                      <Image
                         src="/static/images/cards/temos-vagas.png"
                         width="400"
                         height="225"
@@ -69,7 +70,6 @@ export default async function UserPage() {
                       />
                     </CardHeader>
                     <CardContent>
-                      <h3 className="text-lg font-semibold">{post.name}</h3>
                       <p className="text-gray-500 dark:text-gray-400 line-clamp-2">
                         {post.description}
                       </p>

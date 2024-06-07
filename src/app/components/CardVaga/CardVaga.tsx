@@ -78,7 +78,7 @@ export default async function CardVaga({ searchParams }: Props) {
               </div>
               <div>
                 <ComponentExpandMore>
-                  <p className='text-sm text-gray-600 dark:text-gray-400 line-clamp-2'>{vaga.description}</p>
+                  {vaga.description}
                 </ComponentExpandMore>
               </div>
             </div>
