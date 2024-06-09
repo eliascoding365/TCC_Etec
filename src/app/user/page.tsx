@@ -70,7 +70,7 @@ export default async function UserPage() {
                       />
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-500 dark:text-gray-400 line-clamp-2">
+                      <p className="text-gray-500 dark:text-gray-400 ">
                         {post.description}
                       </p>
                     </CardContent>
