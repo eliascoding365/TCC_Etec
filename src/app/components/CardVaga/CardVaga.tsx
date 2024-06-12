@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import React from 'react'
+import React from 'react';
 import { FaUserCircle } from "react-icons/fa";
 import prisma from '../../../../prisma/client';
 import Pagination from '../Pagination';
@@ -7,10 +7,11 @@ import ComponentExpandMore from './ComponentExpandMore';
 import { getServerSession } from 'next-auth';
 import BadgeComponent from './Badge';
 import Dropdown from './Dropdown';
+import CommentSection from '../CommentSection/CommentSection';
 
 interface Props {
   searchParams: {
-    page: string
+    page: string;
   }
 }
 
@@ -57,8 +58,7 @@ export default async function CardVaga({ searchParams }: Props) {
               </div>
               <div className='ml-auto flex items-center'>
                 {session && user?.id === vaga.createdById && (
-                      <Dropdown>
-                      </Dropdown>
+                      <Dropdown />
                 )}
               </div>
             </div>
@@ -67,7 +67,7 @@ export default async function CardVaga({ searchParams }: Props) {
               <Image
                 src="/static/images/cards/temos-vagas.png"
                 width="400"
-                        height="225"
+                height="225"
                 alt="Picture of the author"
               />
               <div className='flex justify-end mb-4'>
@@ -80,6 +80,9 @@ export default async function CardVaga({ searchParams }: Props) {
                 <ComponentExpandMore>
                   {vaga.description}
                 </ComponentExpandMore>
+                  {user?.id && (
+                    <CommentSection postId={vaga.id} userId={user.id} />
+                  )}
               </div>
             </div>
           </div>

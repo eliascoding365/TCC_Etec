@@ -1,5 +1,4 @@
 import CardVaga from "./components/CardVaga/CardVaga";
-import Component from "./components/CardVaga/Component";
 
 export default function Home({ searchParams}: {searchParams: { page: string}}) {
   return (

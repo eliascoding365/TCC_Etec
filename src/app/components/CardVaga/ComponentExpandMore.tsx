@@ -10,14 +10,11 @@ const ComponentExpandMore: React.FC<ComponentExpandMoreProps> = ({ children }) =
   const [isExpand, setIsExpand] = useState(false);
   const [isTruncated, setIsTruncated] = useState(false);
   const contentRef = useRef<HTMLSpanElement>(null);
-  const measurementRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    if (contentRef.current && measurementRef.current) {
-      const contentHeight = contentRef.current.offsetHeight;
-      const measurementHeight = measurementRef.current.offsetHeight;
-
-      setIsTruncated(contentHeight < measurementHeight);
+    if (contentRef.current) {
+      const { clientHeight, scrollHeight } = contentRef.current;
+      setIsTruncated(clientHeight < scrollHeight);
     }
   }, [children]);
 
@@ -27,16 +24,13 @@ const ComponentExpandMore: React.FC<ComponentExpandMoreProps> = ({ children }) =
 
   return (
     <div className='flex flex-col h-full'>
-      <span
-        ref={measurementRef}
-        className='text-sm text-gray-600 dark:text-gray-400 line-clamp-none absolute opacity-0 pointer-events-none'
-        aria-hidden="true"
-      >
-        {children}
-      </span>
       <div className={`transition-max-height duration-500 ease-in-out overflow-hidden ${isExpand ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
       </div>
-      <span ref={contentRef} className={`text-sm text-gray-600 dark:text-gray-400 ${isExpand ? 'line-clamp-none' : 'line-clamp-2'}`}>
+      <span
+        ref={contentRef}
+        className={`text-sm text-gray-600 dark:text-gray-400 ${isExpand ? 'line-clamp-none' : 'line-clamp-1'}`}
+        style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}
+      >
         {children}
       </span>
       {isTruncated && (
