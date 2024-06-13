@@ -1,36 +1,21 @@
 'use client'
-import React, { useState, useEffect } from 'react';
-import prisma from '../../../../prisma/client';
+import React from 'react';
 
 interface CommentProps {
   comment: {
-    authorId: number;
+    author?: {
+      name: string;
+    };
     content: string;
-    createdAt: string; 
+    createdAt: string;
   };
 }
 
 const Comment = ({ comment }: CommentProps) => {
-  const [userName, setUserName] = useState<string | null>(null);
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const user = await prisma.user.findUnique({
-          where: { id: comment.authorId }
-        });
-        setUserName(user?.name || 'Unknown');
-      } catch (error) {
-        console.error('Error fetching user:', error);
-        setUserName('User');
-      }
-    };
-
-    fetchUser();
-  }, [comment.authorId]);
-
   return (
     <div>
-      <small>by {userName} at {new Date(comment.createdAt).toLocaleString()}</small>
+      <small>{comment.author?.name || 'Unknown'} em {new Date(comment.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+      </small>
       <p>{comment.content}</p>
     </div>
   );

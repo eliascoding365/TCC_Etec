@@ -4,16 +4,14 @@ import prisma from "../../../../prisma/client";
 export async function POST(request: NextRequest) {
     try {
         const { post_id, user_id, content } = await request.json();
-        console.log(post_id, user_id, content);
-
         const newComment = await prisma.comment.create({
-            data: { content, postId: post_id, authorId: user_id }
+            data: { content, postId: post_id, authorId: user_id },
+            include: { author: true }
         });
-        console.log(newComment);
         return NextResponse.json(newComment, { status: 201 });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }
@@ -28,13 +26,13 @@ export async function GET(request: NextRequest) {
 
         const comments = await prisma.comment.findMany({
             where: { postId: parseInt(postId) },
-            include: { author: true } 
+            include: { author: true }
         });
 
         return NextResponse.json(comments, { status: 200 });
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
         return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
 }

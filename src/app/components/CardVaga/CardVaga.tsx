@@ -30,7 +30,7 @@ export default async function CardVaga({ searchParams }: Props) {
     include: {
       createdBy: {
         select: {
-          name: true // Select the name field of the createdBy relation
+          name: true 
         }
       }
     },
