@@ -55,7 +55,7 @@ const CommentSection = ({ postId, userId }: CommentSectionProps) => {
               className='p-1 resize-none flex-grow rounded-sm bg-zinc-100 '
             />
             <div className='my-3 flex justify-end'>
-              <button type="submit" className='text-sm p-1 bg-blue-600 hover:opacity-85 text-white rounded-sm'>Comentar</button>
+              <button type="submit" className='text-sm py-1 px-3 bg-blue-600 hover:opacity-85 text-white rounded-sm'>Comentar</button>
             </div>
           </form>
         </div>

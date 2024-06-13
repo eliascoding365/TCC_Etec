@@ -58,7 +58,7 @@ export default async function CardVaga({ searchParams }: Props) {
               </div>
               <div className='ml-auto flex items-center'>
                 {session && user?.id === vaga.createdById && (
-                      <Dropdown />
+                      <Dropdown postId={vaga.id} />
                 )}
               </div>
             </div>

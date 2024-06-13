@@ -47,3 +47,33 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
 
 }
+
+
+export async function DELETE(request: NextRequest) {
+  const session = await getServerSession();
+
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json({ error: 'Vaga ID is required' }, { status: 400 });
+    }
+
+    const vaga = await prisma.vaga.delete({
+      where: { id: parseInt(id) }
+    });
+
+    if (!vaga) {
+      return NextResponse.json({ error: 'Failed to delete vaga' }, { status: 500 });
+    }
+
+    return NextResponse.json({ message: 'Vaga deleted successfully' }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
+}

@@ -42,7 +42,7 @@ export default async function UserPage() {
           </Avatar>
           <div className="grid gap-1">
             <h1 className="text-2xl font-bold">{user.name}</h1>
-            <p className="text-gray-500 dark:text-gray-400">Resumo engenheiro de software.</p>
+            <p className="text-gray-500 dark:text-gray-400">Seu resumo:</p>
           </div>
           <div className='ml-auto'>
             <Logout />

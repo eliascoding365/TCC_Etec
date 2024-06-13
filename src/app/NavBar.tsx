@@ -21,14 +21,22 @@ const NavBar = () => {
 
 const NavLinks = () => {
   const currentPath = usePathname();
-  const { status, data: session } = useSession()
+  const { status, data: session } = useSession();
   const links = [
     { label: 'Ínicio', href: '/', icon: <PiHouseLine size={'25px'} /> },
     { label: 'Sobre', href: '/sobre', icon: <PiBooks size={'25px'} /> },
     { label: 'Conta', href: '/user', icon: <PiUserCircle size={'25px'} /> },
   ];
 
-  if (status === "loading") return <Skeleton />;
+  if (status === "loading") {
+    return (
+      <ul className='flex items-center justify-end space-x-8'>
+        <li><Skeleton width={27} circle={true} height={27} /></li>
+        <li><Skeleton width={27} circle={true} height={27} /></li>
+        <li><Skeleton width={27} circle={true} height={27} /></li>
+      </ul>
+    );
+  }
 
   return (
     <>
@@ -53,14 +61,17 @@ const NavLinks = () => {
         ))}
       </ul>
     </>
-  )
+  );
 }
+
 const AuthStatus = () => {
-  const { status, data: session } = useSession()
+  const { status, data: session } = useSession();
   const currentPath = usePathname();
 
   if (status === "authenticated" && currentPath === '/') {
-    return <ButtonOpenModalCreateVaga />
+    return <ButtonOpenModalCreateVaga />;
   }
+  return null;
 }
+
 export default NavBar;

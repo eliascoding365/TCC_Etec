@@ -21,11 +21,11 @@ const FormVaga = ({ closeModal }: { closeModal: () => void }) => {
 
     return (
         <form className='flex flex-col px-6' method="dialog" onSubmit={handleSubmit(onSubmit)}>
-            <p className="flex items-center  mb-1 text-gray-700 font-semibold">Nome</p>
+            <p className="flex items-center  mb-1 text-gray-700 font-semibold">Título da vaga</p>
             <div className='flex items-center '>
                 <input className='rounded-md w-full px-4 py-2' type="text" {...register('name')} />
             </div>
-            <p className="flex items-center  mb-1 mt-1  text-gray-700 font-semibold">Escreva seus intereses</p>
+            <p className="flex items-center  mb-1 mt-1  text-gray-700 font-semibold">O que você precisa no seu serviço?</p>
             <div className='flex items-center '>
                 <textarea className='rounded-md w-full h-24 px-4 py-2 resize-none' {...register('description')} />
             </div>
