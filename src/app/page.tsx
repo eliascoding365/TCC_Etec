@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import CardVaga from "./components/CardVaga/CardVaga";
 
 export default function Home({ searchParams}: {searchParams: { page: string}}) {
@@ -7,4 +8,9 @@ export default function Home({ searchParams}: {searchParams: { page: string}}) {
         <CardVaga searchParams={searchParams}/>
     </main>
   );
+}
+
+export const metadata: Metadata = {
+  title: 'VagaNet - Ínicio',
+  description: 'Um projeto que reune pessoas que procuram pequenos serviços'
 }

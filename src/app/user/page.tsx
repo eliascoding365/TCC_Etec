@@ -3,12 +3,16 @@ import React from 'react'
 import { redirect } from 'next/navigation'
 import Logout from '../logout'
 import prisma from '../../../prisma/client'
-
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar } from "@/components/ui/avatar"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { FaUserCircle } from "react-icons/fa"
 import Image from 'next/image'
+import { Metadata } from 'next'
+
+interface Props {
+  params: string
+}
 
 export default async function UserPage() {
   const session = await getServerSession()
@@ -118,3 +122,15 @@ function CalendarDaysIcon(props: React.JSX.IntrinsicAttributes & React.SVGProps<
     </svg>
   )
 }
+
+export async function generateMetadata(){
+  const session = await getServerSession()
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session?.user?.email,
+    }})
+  return {
+      title: 'VagaNet - ' + user?.name,
+      description: 'Página do usuário'
+  }
+  }

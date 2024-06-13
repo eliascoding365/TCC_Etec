@@ -1,5 +1,6 @@
 import React from 'react'
 import "../sobre/estiloSobre.css"
+import { Metadata } from 'next'
 
 
 const AbboutPage = () => {
@@ -37,3 +38,7 @@ Junte-se a nós nesta jornada emocionante enquanto continuamos a conectar talent
 
 export default AbboutPage
 
+export const metadata: Metadata = {
+  title: 'VagaNet - Sobre',
+  description: 'Um projeto que reune pessoas que procuram pequenos serviços'
+}

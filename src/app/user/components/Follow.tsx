@@ -4,6 +4,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { Card, CardHeader, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import React from 'react'
+import Image from "next/image"
 
 const Follow = () => {
   return (
@@ -18,7 +19,7 @@ const Follow = () => {
                 <Card>
                   <CardHeader>
                     <Avatar className="h-12 w-12">
-                      <img src="/placeholder.svg" alt="@shadcn" />
+                      <Image src="/placeholder.svg" alt="@shadcn" />
                       <AvatarFallback>JD</AvatarFallback>
                     </Avatar>
                   </CardHeader>
@@ -42,7 +43,7 @@ const Follow = () => {
                 <Card>
                   <CardHeader>
                     <Avatar className="h-12 w-12">
-                      <img src="/placeholder.svg" alt="@shadcn" />
+                      <Image src="/placeholder.svg" alt="@shadcn" />
                       <AvatarFallback>JD</AvatarFallback>
                     </Avatar>
                   </CardHeader>
