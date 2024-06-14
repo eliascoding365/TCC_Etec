@@ -125,12 +125,23 @@ function CalendarDaysIcon(props: React.JSX.IntrinsicAttributes & React.SVGProps<
 
 export async function generateMetadata(){
   const session = await getServerSession()
+  const userEmail = session?.user?.email;
+
+  if (!userEmail) {
+    return {
+      title: 'VagaNet',
+      description: 'Página do usuário'
+    }
+  }
+
   const user = await prisma.user.findUnique({
     where: {
-      email: session?.user?.email,
-    }})
+      email: userEmail,
+    }
+  })
+
   return {
-      title: 'VagaNet - ' + user?.name,
-      description: 'Página do usuário'
+    title: 'VagaNet - ' + user?.name,
+    description: 'Página do usuário'
   }
-  }
+}
