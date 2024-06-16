@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "Vaga" ALTER COLUMN "name" SET DATA TYPE TEXT;
