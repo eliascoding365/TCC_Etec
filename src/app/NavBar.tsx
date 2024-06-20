@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PiHouseLine, PiUserCircle, PiBooks, PiCodepenLogo } from "react-icons/pi";
+import { PiHouseLine, PiUserCircle, PiBooks } from "react-icons/pi";
 import ButtonOpenModalCreateVaga from "./components/ButtonOpenModalCreateVaga/ButtonOpenModalCreateVaga";
 import classnames from "classnames";
 import { useSession } from 'next-auth/react';
@@ -12,7 +12,7 @@ import { BsSuitcaseLg } from "react-icons/bs";
 
 const NavBar = () => {
   return (
-    <nav className='flex justify-between bg-blue-600 space-x-8 border-b px-32 h-14 items-center'>
+    <nav className='flex justify-between bg-blue-600 border-b px-4 sm:px-8 md:px-16 lg:px-32 h-14 items-center'>
       <Link href="/"> <BsSuitcaseLg className='text-white' size={'25px'} /> </Link>
       <NavLinks />
     </nav>
@@ -30,7 +30,7 @@ const NavLinks = () => {
 
   if (status === "loading") {
     return (
-      <ul className='flex items-center justify-end space-x-8'>
+      <ul className='flex items-center justify-end space-x-6'>
         <li><Skeleton width={27} circle={true} height={27} /></li>
         <li><Skeleton width={27} circle={true} height={27} /></li>
         <li><Skeleton width={27} circle={true} height={27} /></li>
