@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
@@ -11,11 +11,13 @@ import { signIn } from 'next-auth/react'
 import { loginUserSchema } from "@/app/validationSchemas"
 import { z } from "zod"
 import { useRouter } from 'next/navigation';
+import ErrorMessage from '../ErrorMessage'
 
 type LoginFormSchema = z.infer<typeof loginUserSchema>
 
-
 const Form = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+  
   const {
     register,
     handleSubmit,
@@ -27,24 +29,24 @@ const Form = () => {
   const router = useRouter()
 
   const onSubmit = async (data: LoginFormSchema) => {
-    
     try {
       const response = await signIn("credentials", {
         email: data.email,
         password: data.password,
         redirect: false,
       });
-      if (response?.ok === true){
+      if (response?.ok) {
         router.refresh();
+      } else {
+        setErrorMessage('Email ou senha incorretos!');
       }
 
       console.log(response)
     } catch (error) {
-      console.error('Login failed')
+      console.error('Login failed', error)
+      setErrorMessage('Houve um erro em nosso servidor, teste novamente.');
     }
-    
   }
-  
 
   return (
     <div className="mx-auto my-20 max-w-sm h-full space-y-6">
@@ -60,9 +62,10 @@ const Form = () => {
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
-            placeholder="e@exemplo.com"
+            placeholder="email@exemplo.com"
             type="email"
             {...register("email")}
+            
           />
         </div>
         <div className="space-y-2">
@@ -71,8 +74,13 @@ const Form = () => {
             id="password"
             type="password"
             {...register("password")}
+            placeholder="•••••"
           />
         </div>
+        {errorMessage && (
+          <>
+          <ErrorMessage>{errorMessage}</ErrorMessage></>
+        )}
         <footer className="flex justify-center">
           <Button className="w-full bg-blue-600 hover:bg-blue-500 transition-colors">Login</Button>
         </footer>

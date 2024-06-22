@@ -65,12 +65,12 @@ export default function FormRegister() {
         </div>
         <div className="space-y-2 mb-2">
           <Label htmlFor="password">Senha</Label>
-          <Input id="password" {...register('password')} type="password" />
+          <Input id="password" {...register('password')} type="password" placeholder="•••••" />
           {password && password.length < 5 && <ErrorMessage>Campo senha precisa ter 5 letras</ErrorMessage>}
         </div>
         <div className="space-y-2 mb-6">
           <Label htmlFor="confirm">Confirme sua senha</Label>
-          <Input id="confirm" {...register('confirm')} type="password" />
+          <Input id="confirm" {...register('confirm')} type="password" placeholder="•••••" />
           {password && confirm && password !== confirm && <ErrorMessage>Senhas divergentes</ErrorMessage>}
         </div>
         <div className="flex items-center mt-8 mb-6">
