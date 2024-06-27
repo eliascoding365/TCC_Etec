@@ -40,3 +40,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 VagaNet, um projeto que reune pessoas que procuram pequenos serviços
 acesse nossa primeira versão do projeto: https://tcc-etec.vercel.app/
 ## Demo: https://tcc-etec.vercel.app/
+apresentado dia 26/06/2024 - Adilson, Alex, Elias, Italo
